@@ -21,7 +21,8 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	UPROPERTY(EditAnywhere, Category = "CrossHair")
 	float CrossHairYLocation = 0.3333f;
 	
-	
+	UPROPERTY(EditAnywhere, Category = "CrossHair")
+	float LineTraceRange = 1000000;
 public:
 	virtual void BeginPlay() override;
 
@@ -37,4 +38,9 @@ public:
 private:
 	// Return an Out Parameter, true if hit landscape
 	bool GetSighRayHitLocation(FVector& HitLocation) const;
+
+	// Return an look direction, 
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector& HitLocation, FVector LookDirection) const;
 };

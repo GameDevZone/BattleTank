@@ -41,9 +41,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 
 	if (GetSighRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
-
-			// tell controlled tank to aim at this point
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
 	}
 	
 }
@@ -53,13 +51,44 @@ bool ATankPlayerController::GetSighRayHitLocation(FVector& HitLocation) const
 	// Find cross hair position
 	int32 ViewPortSizeX, ViewPortSizeY;
 	GetViewportSize(ViewPortSizeX, ViewPortSizeY);
-	UE_LOG(LogTemp, Warning, TEXT("ViewPortSizeX: %d"), ViewPortSizeX);
-	UE_LOG(LogTemp, Warning, TEXT("ViewPortSizeY: %d"), ViewPortSizeY);
 	
 	FVector2D ScreenLocation = FVector2D(ViewPortSizeX * CrossHairXLocation, ViewPortSizeY * CrossHairYLocation);
-
+	FVector LookDirection;
 	// De-project the screen position to world position
-	// line trace along the look direction, and see what we hit
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		// line trace along the look direction, and see what we hit
+		//GetWord()->LineTrace
+		GetLookVectorHitLocation(HitLocation, LookDirection);
+	}
+	
 	return true;
+}
+
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{	
+	FVector CameraWorldLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector& HitLocation, FVector LookDirection) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();	// Ïà»úÎ»ÖÃ
+	auto EndLocation = StartLocation + LookDirection * LineTraceRange;
+
+	if (GetWorld()->LineTraceSingleByChannel(
+			HitResult, 
+			StartLocation,
+			EndLocation,
+			ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+
+	HitLocation = FVector(0);
+	return false;
 }
 
