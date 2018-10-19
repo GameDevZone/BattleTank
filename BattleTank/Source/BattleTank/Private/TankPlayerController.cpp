@@ -57,12 +57,10 @@ bool ATankPlayerController::GetSighRayHitLocation(FVector& HitLocation) const
 	// De-project the screen position to world position
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		// line trace along the look direction, and see what we hit
-		//GetWord()->LineTrace
-		GetLookVectorHitLocation(HitLocation, LookDirection);
+		return GetLookVectorHitLocation(HitLocation, LookDirection);
 	}
 	
-	return true;
+	return false;
 }
 
 
