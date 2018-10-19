@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "TankAimingComponent.h"
 #include "Tank.generated.h"
 
 UCLASS()
@@ -28,5 +29,12 @@ public:
 
 public:
 	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = "Set")
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+protected:
+
+	UTankAimingComponent* TankAimingComponent = nullptr;
 	
 };
