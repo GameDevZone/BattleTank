@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankAimingComponent.h"
+
 
 
 // Sets default values for this component's properties
@@ -39,7 +41,31 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector WorldSpaceAmi, float LaunchSpeed)
 {
+	if (!TankBarrel) { return; }
+
+	FVector OutLaunchVelocity;
+	FVector StartLocation = TankBarrel->GetSocketLocation(FName("Projectile"));
+
+
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		WorldSpaceAmi,
+		LaunchSpeed,
+		false,
+		0,
+		0, 
+		ESuggestProjVelocityTraceOption::DoNotTrace
+		)
+	)
+	{
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		auto TankName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s Aiming at %s"), *TankName, *AimDirection.ToString());
+	}
+
+
 	
-	UE_LOG(LogTemp, Warning, TEXT("Firing at %f"), LaunchSpeed);
 }
 
