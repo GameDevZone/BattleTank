@@ -14,6 +14,9 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 private:
 	UStaticMeshComponent* TankBarrel = nullptr;
+	
+
+	void MoveBarrelTowards(FVector AimDirection);
 
 public:	
 	// Sets default values for this component's properties
