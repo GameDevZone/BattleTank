@@ -41,7 +41,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector WorldSpaceAmi, float LaunchSpeed)
 {
-	if (!TankBarrel) { return; }
+	if (!TankBarrel) { UE_LOG(LogTemp, Warning, TEXT("No Tank Barrel"));  return; }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = TankBarrel->GetSocketLocation(FName("Projectile"));
@@ -63,7 +63,11 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAmi, float LaunchSpeed)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
-	}	   
+	}	
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("bHaveAimSolution is false"));
+	}
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
@@ -75,9 +79,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	if (TankBarrel)
 	{
-		TankBarrel->Elevate(5);
+		TankBarrel->Elevate(DeltaRotator.Pitch);
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator %s"), *DeltaRotator.ToString());
 }
 

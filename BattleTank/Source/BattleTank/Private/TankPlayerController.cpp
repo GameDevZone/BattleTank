@@ -43,6 +43,10 @@ void ATankPlayerController::AimTowardsCrossHair()
 	{
 		GetControlledTank()->AimAt(HitLocation);
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("PlayerController Not Hit Landscape"));
+	}
 	
 }
 // get world location if line trace through cross hair, true if it hits the landscape 
