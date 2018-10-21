@@ -15,13 +15,13 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category = "CrossHair")
+	UPROPERTY(EditDefaultsOnly, Category = "CrossHair")
 	float CrossHairXLocation = 0.5f;
 
-	UPROPERTY(EditAnywhere, Category = "CrossHair")
+	UPROPERTY(EditDefaultsOnly, Category = "CrossHair")
 	float CrossHairYLocation = 0.3333f;
 	
-	UPROPERTY(EditAnywhere, Category = "CrossHair")
+	UPROPERTY(EditDefaultsOnly, Category = "CrossHair")
 	float LineTraceRange = 1000000;
 public:
 	virtual void BeginPlay() override;

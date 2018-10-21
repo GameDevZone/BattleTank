@@ -42,22 +42,22 @@ public:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
-	UPROPERTY(EditAnywhere, Category = "Firing")
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ReloadTimeInSeconds = 3;
 
 	// Local barrel ref for spawning projectile
 	UTankBarrel* Barrel = nullptr;
 	//UClass* ProjectileBlueprint;
 
-
-	float ReloadTimeInSeconds = 3;
 
 	float LastFireTime = 0;
 };
