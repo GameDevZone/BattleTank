@@ -38,7 +38,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Set")
 	void SetTurretReference(UTankTurret* TurretToSet);
-protected:
+public:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
@@ -55,4 +55,9 @@ protected:
 	// Local barrel ref for spawning projectile
 	UTankBarrel* Barrel = nullptr;
 	//UClass* ProjectileBlueprint;
+
+
+	float ReloadTimeInSeconds = 3;
+
+	float LastFireTime = 0;
 };

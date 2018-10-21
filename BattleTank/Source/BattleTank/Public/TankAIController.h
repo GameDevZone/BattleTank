@@ -20,10 +20,4 @@ public:
     virtual	void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
-	// Get AI Controller Controlled Tank
-	ATank* GetAIControlledTank() const;	
-
-	// Get Player Controller Controlled Tank for Aiming
-	ATank* GetPlayerTank() const;
 };
