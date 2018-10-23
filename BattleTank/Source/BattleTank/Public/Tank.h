@@ -40,7 +40,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Set")
 	void SetTurretReference(UTankTurret* TurretToSet);
 public:
-
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)

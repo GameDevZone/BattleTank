@@ -29,6 +29,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Get Player Controller Controlled Tank
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank * GetControlledTank() const;	
 
 	// start the tank move the barrel so that a shot would it 
