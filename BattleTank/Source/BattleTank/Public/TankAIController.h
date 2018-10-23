@@ -20,4 +20,8 @@ public:
     virtual	void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
+
+	// how close can tank get to player
+	UPROPERTY(EditAnywhere)
+	float AcceptanceRadius = 3000;
 };
