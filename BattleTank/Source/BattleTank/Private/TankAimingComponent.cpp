@@ -17,17 +17,12 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::Initialise(UTankBarrel* BarreltoSet, UTankTurret* TurrettoSet)
 {
-	if (!BarrelToSet) { return; }
-	TankBarrel = BarrelToSet;
+	TankBarrel = BarreltoSet;
+	TankTurret = TurrettoSet;
 }
 
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-	if (!TurretToSet) { return; }
-	TankTurret = TurretToSet;
-}
 
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
@@ -80,6 +75,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAmi, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!TankBarrel || !TankTurret) { return; }
 	FRotator BarrelRotator = TankBarrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 

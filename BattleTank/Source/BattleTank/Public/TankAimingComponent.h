@@ -7,7 +7,7 @@
 #include "TankAimingComponent.generated.h"
 
 // Enum for aiming state
-UENUM()
+UENUM(meta = (BlueprintSpawnableComponent))
 enum class EFiringStatus : uint8
 {
 	Locked, Aiming, Reloading
@@ -36,9 +36,8 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarreltoSet, UTankTurret* TurrettoSet);
 
 protected:
 	// Called when the game starts
